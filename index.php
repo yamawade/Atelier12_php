@@ -78,6 +78,7 @@ function moyenne(){
     
     foreach ($tab as $nombre) {
         if ($nombre > $moyenne) {
+            array_push($nombresSuperieurs,$nombre);
             $nombresSuperieurs[] = $nombre;
         } elseif ($nombre < $moyenne) {
             $nombresInferieurs[] = $nombre;
@@ -106,16 +107,8 @@ $etudiantsFusionnes = [...$etudiants1,...$etudiants2];
 echo "Étudiants fusionnés avec doublons :<br>";
 print_r($etudiantsFusionnes);
 
-function comparerEtudiants($etudiant1, $etudiant2) {
-    return (
-        $etudiant1["nom"] === $etudiant2["nom"] &&
-        $etudiant1["prénom"] === $etudiant2["prénom"] &&
-        $etudiant1["âge"] === $etudiant2["âge"] &&
-        $etudiant1["note"] === $etudiant2["note"]
-    );
-}
 
-$etudiantsAbsents = array_udiff($etudiants1, $etudiants2, 'comparerEtudiants');
+$etudiantsAbsents = array_diff_key($etudiants1, $etudiants2);
 echo "Étudiants présents dans le premier tableau, mais absents dans le deuxième :<br>";
 print_r($etudiantsAbsents); 
 
@@ -168,6 +161,24 @@ function comparerPhrases2($phrase1, $phrase2) {
 $phrase1 = "cc Yama";
 $phrase2 = "cc Yama";
 comparerPhrases2($phrase1, $phrase2);
+
+// Heure de départ
+$heureDepart = new DateTime("2023-10-18 08:30:00");
+
+// Heure de départ
+$heureDepart = new DateTime("2023-10-18 08:30:00");
+
+// Heure d'arrivée
+$heureArrivee = new DateTime("2023-11-19 12:45:00"); // Le mois peut être différent
+
+// Calcul de la durée en heures
+$interval = $heureDepart->diff($heureArrivee);
+$dureeEnHeures = $interval->days * 24 + $interval->h;
+
+// Affichage de la durée en heures
+echo "Heure de départ : " . $heureDepart->format("Y-m-d H:i:s") . "<br>";
+echo "Heure d'arrivée : " . $heureArrivee->format("Y-m-d H:i:s") . "<br>";
+echo "Durée en heures : " . $dureeEnHeures . " heures<br>";
 
 
 ?>
